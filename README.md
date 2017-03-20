@@ -38,6 +38,8 @@ XvXXXXXXXXXv>>X
 XFXXXXXXXXXXXXX
 ```
 
+Symbols "<, >, V, ^" mean according movement, and * means went this way and came back if got trapped.
+
 With regards,
 Kayan A.
 
