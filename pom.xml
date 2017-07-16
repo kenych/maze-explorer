@@ -14,6 +14,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>artifactory</id>
+            <name>artifactory</name>
+            <url>http://192.168.1.5:8082/artifactory/example-repo-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
