@@ -18,7 +18,7 @@
         <snapshotRepository>
             <id>artifactory</id>
             <name>artifactory</name>
-            <url>${ARTIFACTORY_URL}</url>
+            <url>${artifactory_url}</url>
         </snapshotRepository>
     </distributionManagement>
 
