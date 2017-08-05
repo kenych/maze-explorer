@@ -12,13 +12,14 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.host.url>http://mysonar:9000</sonar.host.url>
     </properties>
 
     <distributionManagement>
         <snapshotRepository>
             <id>artifactory</id>
             <name>artifactory</name>
-            <url>${artifactory_url}</url>
+            <url>http://artifactory:8081/artifactory/example-repo-local</url>
         </snapshotRepository>
     </distributionManagement>
 
