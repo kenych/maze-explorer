@@ -1,21 +1,13 @@
-pipeline {
-    agent any
 
-    tools {
-        maven 'maven3'
-    }
+podTemplate(label: 'test', containers: [
+  containerTemplate(name: 'maven', image: 'maven:3.2-jdk-7-onbuild', ttyEnabled: true, command: 'cat')
+  ]) {
 
-    stages {
-        stage('install') {
-            steps {
-                sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
-            }
-            post {
-                always {
-                    junit '**/target/*-reports/TEST-*.xml'
-                    step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
-                }
-            }
-        }
+  node('test') {
+    stage('test') {
+      container('maven') {
+          sh 'mvn --version'
+      }
     }
+  }
 }
