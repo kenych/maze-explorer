@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+		//use shared library
+		mavenTest()
             }
             post {
                 always {
