@@ -1,13 +1,13 @@
+node {
+    
+def approvedHashes = []
 
-podTemplate(label: 'test', containers: [
-  containerTemplate(name: 'maven', image: 'maven:3.2-jdk-7-onbuild', ttyEnabled: true, command: 'cat')
-  ]) {
+org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval.get().approvedScriptHashes.each {
+  println "approved hash: ${it}"
+  approvedHashes << it	 
+}
 
-  node('test') {
-    stage('test') {
-      container('maven') {
-          sh 'mvn --version'
-      }
-    }
-  }
+def json = groovy.json.JsonOutput.toJson(approvedHashes)
+
+new File('cnf.json').write(json)
 }
