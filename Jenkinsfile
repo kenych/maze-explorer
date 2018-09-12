@@ -1,17 +1,31 @@
 pipeline {
     agent any
+    // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
+	def server = Artifactory.server "jfrog"
+	// Create an Artifactory Maven instance.
+	def rtMaven = Artifactory.newMavenBuild()
+	def buildInfo
 
     tools {
         jdk 'jdk8'
         maven 'maven3'
     }
+    
 
     stages {
+        stage('Artifactory configuration') {
+		    // Tool name from Jenkins configuration
+		    rtMaven.tool = "maven3"
+		    // Set Artifactory repositories for dependencies resolution and artifacts deployment.
+		    rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
+		    rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
+	    }
+        
         stage('install and sonar parallel') {
             steps {
                 parallel(
                         install: {
-                            sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+                            buildInfo = rtMaven.run pom: 'pom.xml', goals: ' clean test cobertura:cobertura -Dcobertura.report.format=xml"
                         },
                         sonar: {
                             sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
@@ -25,12 +39,9 @@ pipeline {
                 }
             }
         }
-        stage('deploy') {
-            steps {
-                configFileProvider([configFile(fileId: 'artifactory-settings', variable: 'SETTINGS')]) {
-                    sh "mvn -s $SETTINGS deploy -DskipTests -Dartifactory_url=${env.ARTIFACTORY_URL}"
-                }
-            }
+
+        stage('Publish build info') {
+            server.publishBuildInfo buildInfo
         }
     }
 }
