@@ -1,16 +1,9 @@
-pipeline {
-    agent any
-    // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
+node {
+    	// Get Artifactory server instance, defined in the Artifactory Plugin administration page.
 	def server = Artifactory.server "jfrog"
 	// Create an Artifactory Maven instance.
 	def rtMaven = Artifactory.newMavenBuild()
-	def buildInfo
-
-    tools {
-        jdk 'jdk8'
-        maven 'maven3'
-    }
-    
+	def buildInfo    
 
     stages {
         stage('Artifactory configuration') {
