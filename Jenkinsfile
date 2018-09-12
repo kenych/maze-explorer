@@ -31,7 +31,7 @@ node {
     		// requires SonarQube Scanner 2.8+
     		def scannerHome = tool 'sonarqube';
     		withSonarQubeEnv('sonar') {
-      			sh "${scannerHome}/bin/sonar-scanner"
+      			sh "mvn sonar:sonar"
     		}
   	}
 
