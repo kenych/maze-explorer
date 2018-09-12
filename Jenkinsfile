@@ -27,13 +27,20 @@ node {
 	}
 	
 	
-	stage('SonarQube analysis') {
+	//stage('SonarQube analysis') {
     		// requires SonarQube Scanner 2.8+
-		def mvnHome = tool name: 'maven3', type: 'maven'
-    		withSonarQubeEnv('sonar') {
-			sh "${mvnHome}/bin/mvn sonar:sonar"
-    		}
-  	}
+	//	def mvnHome = tool name: 'maven3', type: 'maven'
+    	//	withSonarQubeEnv('sonar') {
+	//		sh "${mvnHome}/bin/mvn sonar:sonar"
+    	//	}
+  	//}
+	
+	stage('SonarQube analysis'){
+		def scannerHome = tool 'scanner'
+                withSonarQubeEnv('sonar') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+		}
+	}
 
         stage('Publish build info') {
             server.publishBuildInfo buildInfo
