@@ -18,7 +18,7 @@ node {
   	}
 	
         stage('Build and test') {
-        	buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean test cobertura:cobertura -Dcobertura.report.format=xml'
+        	buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install cobertura:cobertura -Dcobertura.report.format=xml'
 	}
 	
 	stage('Unit Test') {
