@@ -16,7 +16,7 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>myartifact</id>
+            <id>snapshots</id>
             <name>artifactory</name>
             <url>http://172.17.0.4:8081/artifactory/libs-snapshot-local</url>
         </snapshotRepository>
