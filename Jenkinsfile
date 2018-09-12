@@ -29,7 +29,6 @@ node {
 	
 	stage('SonarQube analysis') {
     		// requires SonarQube Scanner 2.8+
-    		def scannerHome = tool 'sonarqube';
     		withSonarQubeEnv('sonar') {
       			sh "mvn sonar:sonar"
     		}
