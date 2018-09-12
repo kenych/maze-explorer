@@ -5,7 +5,6 @@ node {
 	def rtMaven = Artifactory.newMavenBuild()
 	def buildInfo    
 
-    stages {
         stage('Artifactory configuration') {
 		    // Tool name from Jenkins configuration
 		    rtMaven.tool = "maven3"
@@ -36,5 +35,4 @@ node {
         stage('Publish build info') {
             server.publishBuildInfo buildInfo
         }
-    }
 }
