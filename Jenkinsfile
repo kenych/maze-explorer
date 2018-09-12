@@ -21,10 +21,6 @@ node {
         	junit '**/target/*-reports/TEST-*.xml'
                 step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
         }
-         
-	stage('Sonar') {
-		sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"	
-        }
 
         stage('Publish build info') {
             server.publishBuildInfo buildInfo
