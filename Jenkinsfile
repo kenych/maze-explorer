@@ -25,7 +25,7 @@ pipeline {
             steps {
                 parallel(
                         install: {
-                            buildInfo = rtMaven.run pom: 'pom.xml', goals: ' clean test cobertura:cobertura -Dcobertura.report.format=xml"
+                            buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean test cobertura:cobertura -Dcobertura.report.format=xml'
                         },
                         sonar: {
                             sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
