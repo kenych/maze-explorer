@@ -21,11 +21,6 @@ node {
         	buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean test cobertura:cobertura -Dcobertura.report.format=xml'
 	}
 	
-	stage('Unit Test') {
-        	junit '**/target/*-reports/TEST-*.xml'
-                step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
-        }
-	
 	stage('SonarQube analysis') {
     		// requires SonarQube Scanner 2.8+
     		def scannerHome = tool 'sonarqube';
@@ -33,6 +28,11 @@ node {
       			sh "${scannerHome}/bin/sonar-scanner"
     		}
   	}
+	
+	stage('Unit Test') {
+        	junit '**/target/*-reports/TEST-*.xml'
+                step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
+	}
 
         stage('Publish build info') {
             server.publishBuildInfo buildInfo
