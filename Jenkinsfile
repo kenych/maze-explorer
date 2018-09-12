@@ -13,23 +13,18 @@ node {
 		    rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
 	    }
         
-        stage('install and sonar parallel') {
-            steps {
-                parallel(
-                        install: {
-                            buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean test cobertura:cobertura -Dcobertura.report.format=xml'
-                        },
-                        sonar: {
-                            sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
-                        }
-                )
-            }
-            post {
+        stage('Build and test') {
+        	buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean test cobertura:cobertura -Dcobertura.report.format=xml'
+		post {
                 always {
                     junit '**/target/*-reports/TEST-*.xml'
                     step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
                 }
             }
+        }
+	
+	stage('Sonar') {
+		sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"	
         }
 
         stage('Publish build info') {
