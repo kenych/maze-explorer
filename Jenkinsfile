@@ -13,9 +13,9 @@ node {
 		    rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
 	    }
         
-	stage('SCM') {
-    		git 'https://github.com/lovelinuxalot/maze-explorer.git'
-  	}
+	//stage('SCM') {
+    	//	git 'https://github.com/lovelinuxalot/maze-explorer.git'
+  	//}
 	
         stage('Build and test') {
         	buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean package cobertura:cobertura -Dcobertura.report.format=xml'
