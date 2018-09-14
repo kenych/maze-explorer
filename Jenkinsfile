@@ -54,14 +54,16 @@ node {
 		}
 
 		def BrowserTests(){
-			stage('Chrome') {
-			}
-			stage('Firefox') {
-			}
-			stage('Ie-10') {
-			}
-			stage('Opera') {
-			}
+			stage name: 'Chrome', concurrency: 1
+			stage name: 'Firefox', concurrency: 1
+			// stage('Chrome') {
+			// }
+			// stage('Firefox') {
+			// }
+			// stage('Ie-10') {
+			// }
+			// stage('Opera') {
+			// }
 
 		}
 
