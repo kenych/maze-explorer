@@ -26,9 +26,11 @@ node {
 		preProduction()
 		manualPromotion()
 		production()
-
+}
 		def checkout() {
-				stage name: 'Checkout', concurrency: 1
+
+				stage('Checkout') {
+				}
 		}
 		def build(){
 			stage name: 'Build', concurrency: 1
@@ -89,4 +91,3 @@ node {
   //       stage('Publish build info') {
   //           server.publishBuildInfo buildInfo
   //       }
-}
