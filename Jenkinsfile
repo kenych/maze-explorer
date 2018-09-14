@@ -52,6 +52,19 @@ node {
 			stage name: 'allCodeQualityTests', concurrency: 1
 
 		}
+
+		def BrowserTests(){
+			stage('Chrome') {
+			}
+			stage('Firefox') {
+			}
+			stage('Ie-10') {
+			}
+			stage('Opera') {
+			}
+
+		}
+
 		def preProduction(){
 			stage name: 'preProduction', concurrency: 1
 
@@ -63,9 +76,10 @@ node {
 		def production(){
 			stage name: 'production', concurrency: 1
 		}
-        stage('Build and test') {
-        	buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean package cobertura:cobertura -Dcobertura.report.format=xml'
-	}
+
+  //       stage('Build and test') {
+  //       	buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean package cobertura:cobertura -Dcobertura.report.format=xml'
+	// }
 
 	// stage('Unit Test') {
   //       	junit '**/target/*-reports/TEST-*.xml'
