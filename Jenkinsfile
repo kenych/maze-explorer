@@ -38,7 +38,7 @@ node {
 	stage('SonarQube analysis'){
 		def scannerHome = tool 'scanner'
                 withSonarQubeEnv('sonar') {
-                    sh "${scannerHome}/bin/sonar-scanner -D sonar-project.properties"
+                    sh "${scannerHome}/bin/sonar-scanner"
 		}
 	}
 
