@@ -13,21 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>artifactory</name>
-            <url>http://172.17.0.4:8081/artifactory/libs-snapshot-local</url>
-        </snapshotRepository>
-        <repository>
-            <id>central</id>
-            <name>0a6a906389f5-releases</name>
-            <url>http://172.17.0.4:8081/artifactory/libs-release-local</url>
-    </repository>
-    </distributionManagement>
-
-
+         
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
