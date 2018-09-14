@@ -17,14 +17,49 @@ node {
     		git 'https://github.com/jijeesh/maze-explorer.git'
   	}
 
+		checkout()
+		build()
+		allTests()
+		preview()
+		sonarServer()
+		allCodeQualityTests()
+		preProduction()
+		manualPromotion()
+		production()
+
+		def checkout(){
+
+		}
+		def build(){
+
+		}
+		def allTests(){
+
+		}
+		def preview(){
+
+		}
+		def sonarServer(){
+
+		}
+		def allCodeQualityTests(){
+
+		}
+		def preProduction(){
+
+		}
+		def manualPromotion(){
+
+		}
+		def production()
         stage('Build and test') {
         	buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean package cobertura:cobertura -Dcobertura.report.format=xml'
 	}
 
-	stage('Unit Test') {
-        	junit '**/target/*-reports/TEST-*.xml'
-                step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
-	}
+	// stage('Unit Test') {
+  //       	junit '**/target/*-reports/TEST-*.xml'
+  //               step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
+	// }
 
 
 	//stage('SonarQube analysis') {
