@@ -27,31 +27,40 @@ node {
 		manualPromotion()
 		production()
 
-		def checkout(){
-
+		def checkout() {
+				stage name: 'Checkout', concurrency: 1
 		}
 		def build(){
+			stage name: 'Build', concurrency: 1
 
 		}
 		def allTests(){
+			stage name: 'allTests', concurrency: 1
 
 		}
 		def preview(){
+			stage name: 'Preview', concurrency: 1
 
 		}
 		def sonarServer(){
+			stage name: 'sonarServer', concurrency: 1
 
 		}
 		def allCodeQualityTests(){
+			stage name: 'allCodeQualityTests', concurrency: 1
 
 		}
 		def preProduction(){
+			stage name: 'preProduction', concurrency: 1
 
 		}
 		def manualPromotion(){
+			stage name: 'manualPromotion', concurrency: 1
 
 		}
-		def production()
+		def production(){
+			stage name: 'production', concurrency: 1
+		}
         stage('Build and test') {
         	buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean package cobertura:cobertura -Dcobertura.report.format=xml'
 	}
@@ -70,14 +79,14 @@ node {
     	//	}
   	//}
 
-	stage('SonarQube analysis'){
-		def scannerHome = tool 'scanner'
-                withSonarQubeEnv('sonar') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-		}
-	}
-
-        stage('Publish build info') {
-            server.publishBuildInfo buildInfo
-        }
+	// stage('SonarQube analysis'){
+	// 	def scannerHome = tool 'scanner'
+  //               withSonarQubeEnv('sonar') {
+  //                   sh "${scannerHome}/bin/sonar-scanner"
+	// 	}
+	// }
+	//
+  //       stage('Publish build info') {
+  //           server.publishBuildInfo buildInfo
+  //       }
 }
